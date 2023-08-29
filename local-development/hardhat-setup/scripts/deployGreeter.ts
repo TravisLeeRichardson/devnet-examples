@@ -1,4 +1,4 @@
-import { ethers } from "hardhat";
+import { ethers, tenderly } from "hardhat";
 
 async function main() {
     //Prepare the deployer wallet - this will be based on the private key we set up in config
@@ -15,6 +15,13 @@ async function main() {
     //We wait for the deployment to be completed and confirmed
     await greeter.deployed();
     await greeter.setGreeting("hello");
+
+
+  await tenderly.verify({
+    name: "Greeter",
+    address: greeter.address
+  })
+
 
     //This will tell us the address at which the contract was deployed
     console.log('Greeter deployed to:', greeter.address);
