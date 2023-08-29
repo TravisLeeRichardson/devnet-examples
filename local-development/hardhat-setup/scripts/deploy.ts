@@ -1,4 +1,4 @@
-import { ethers } from "hardhat";
+import { ethers, tenderly } from "hardhat";
 
 async function main() {
   const currentTimestampInSeconds = Math.round(Date.now() / 1000);
@@ -10,6 +10,11 @@ async function main() {
   const lock = await Lock.deploy(unlockTime, { value: lockedAmount });
 
   await lock.deployed();
+
+  await tenderly.verify({
+    name: "Lock",
+    address: lock.address
+  })
 
   console.log(
     `Lock with ${ethers.utils.formatEther(lockedAmount)}ETH and unlock timestamp ${unlockTime} deployed to ${lock.address}`

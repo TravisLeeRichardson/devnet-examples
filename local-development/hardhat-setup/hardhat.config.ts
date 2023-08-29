@@ -3,32 +3,29 @@ import "@nomicfoundation/hardhat-toolbox";
 
 import * as tdly from "@tenderly/hardhat-tenderly";
 import * as dotenv from "dotenv";
-
-tdly.setup({
-    automaticVerifications: true,
-});
-
 dotenv.config();
 
-const {
-    DEVNET_RPC_URL,
-} = process.env;
+tdly.setup(
+  
+    {
+    automaticVerifications: false,
+});
 
-function createDevnet() {
-    return DEVNET_RPC_URL;
-}
+
 
 const config: HardhatUserConfig = {
     solidity: "0.8.18",
     defaultNetwork: "tenderly_devnet",
     networks: {
-        tenderly_devnet: {
-            url: createDevnet(),
+        tenderly: {
+           // url: 'https://rpc.vnet.tenderly.co/devnet/my-first-devnet/8bbbff6c-6cc6-4dd1-9327-092471c44e36',
+            url: 'https://rpc.vnet.tenderly.co/devnet/my-first-devnet/2c94cdf6-47e3-4a3a-ac89-ff2307edfd6d',
+            chainId: 1
         }
     },
     tenderly: {
-        username: "filipTenderly", // tenderly username (or organization name)
-        project: "test", // project name
+        username: "tlrichar", // tenderly username (or organization name)
+        project: "project", // project name
         privateVerification: false // if true, contracts will be verified privately, if false, contracts will be verified publicly
     }
 };
