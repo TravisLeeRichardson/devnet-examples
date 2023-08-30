@@ -18,7 +18,7 @@ const {
 } = defaultValues();
 
 let command = `tenderly devnet spawn-rpc --project ${TENDERLY_PROJECT_SLUG} --template ${TENDERLY_DEVNET_TEMPLATE} --account ${TENDERLY_ACCOUNT_ID}  --access_key ${TENDERLY_ACCESS_KEY}`
-
+console.log (command);
 const createDevNet = async () => {
     const {stderr} = await exec(command);
     const devNetUrl = stderr.trim().toString();
